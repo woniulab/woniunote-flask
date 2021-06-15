@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>蜗牛笔记-全功能博客系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+          shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/woniunote.css" type="text/css"/>
+    <link href="/icon/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/woniunote.js"></script>
+</head>
+<body>
+<!-- 首页顶部Logo和Slogan区域 -->
+<div class="navbar-default header">
+    <div class="container" style="padding: 0px 10px 0px 0px;">
+        <div class="row">
+            <div class="col-sm-4 col-4" style="margin: 10px 0px;">
+                <a href="/">
+                    <img src="/img/logo.png" style="width: 230px;">
+                </a>
+            </div>
+            <!-- 仅在sm及以上设备中显示 -->
+            <div class="col-sm-8 col-8 d-none d-sm-block"
+                 style="text-align: right; padding-top: 20px;">
+                <h2 style="color: midnightblue">以蜗牛之名, 行学习之实</h2>
+            </div>
+            <!-- 仅在移动端显示 -->
+            <div class="col-sm-8 col-8 d-sm-none"
+                 style="text-align: right; padding-top: 20px;">
+                <h3 style="color: midnightblue">技术博客</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 设置一个最外层DIV，保持100%的宽度拉通，设置导航栏 -->
+<div class="menu">
+    <div class="container" style="padding: 0px;">
+        <!-- 基于BootStrap定制导航栏，可以参数bootcss.com中文网站的教程 -->
+        <nav class="navbar navbar-expand-lg navbar-dark menu-bar">
+            <a class="navbar-brand" href="#">快捷导航</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- 配置折叠按钮，在移动端点击即可显示导航菜单，所有类和ID属性请勿修改 -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- 配置导航菜单项列表 -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+<!--                    <a class="nav-item nav-link" href="/type/1">PHP开发</a>-->
+<!--                    <a class="nav-item nav-link" href="/type/2">Java开发</a>-->
+<!--                    <a class="nav-item nav-link" href="/type/3">Python开发</a>-->
+<!--                    <a class="nav-item nav-link" href="/type/4">Web前端</a>-->
+<!--                    <a class="nav-item nav-link" href="/type/5">测试开发</a>-->
+<!--                    <a class="nav-item nav-link" href="/type/6">数据科学</a>-->
+<!--                    <a class="nav-item nav-link" href="/type/7">网络安全</a>-->
+<!--                    <a class="nav-item nav-link" href="/type/8">蜗牛杂谈</a>-->
+                    
+                    <a class="nav-item nav-link" href="/type/1-1">PHP开发</a>
+                    
+                    <a class="nav-item nav-link" href="/type/2-1">Java开发</a>
+                    
+                    <a class="nav-item nav-link" href="/type/3-1">Python开发</a>
+                    
+                    <a class="nav-item nav-link" href="/type/4-1">Web前端</a>
+                    
+                    <a class="nav-item nav-link" href="/type/5-1">测试开发</a>
+                    
+                    <a class="nav-item nav-link" href="/type/6-1">数据科学</a>
+                    
+                    <a class="nav-item nav-link" href="/type/7-1">网络安全</a>
+                    
+                    <a class="nav-item nav-link" href="/type/8-1">蜗牛杂谈</a>
+                    
+                </div>
+                <!-- ml-auto类属性设置菜单项靠右对齐 -->
+                <div class="navbar-nav ml-auto" id="loginmenu">
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- 中部区域布局 -->
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <!-- 填充中部左侧文章列表和文章阅读页面内容 -->
+        
+
+        <div class="col-sm-9 col-12" style="padding: 0 10px;" id="left">
+            <!-- 轮播图组件应用，除了修改图片路径外，其它内容可不修改 -->
+            <div id="carouselExampleIndicators" class="col-12 carousel slide"
+                 data-ride="carousel" style="padding: 0px">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0"
+                        class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/img/banner-1.jpg" class="d-block w-100" alt="Banner广告一">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/banner-2.jpg" class="d-block w-100" alt="Banner广告二">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/banner-3.jpg" class="d-block w-100" alt="Banner广告三">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators"
+                    role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators"
+                    role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/1">漫谈：强哥在强哥学堂想对朋友们说的一些话</a></div>
+                    <div class="info">作者：强哥&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:18:02&nbsp;&nbsp;&nbsp;阅读：1513 次&nbsp;&nbsp;&nbsp;消耗积分：2 分</div>
+                    <div class="intro">
+                        大家好，我是强哥，我是一名程序员。我始终相信“技术改变生活，研发构建未来”。今天咱们一起来聊一聊技术，尤其是IT技术，是如何一步一步从一个小众玩家变成大众产业，逐步...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/2">漫谈：已经有蜗牛学院了，为什么还要创办强哥学堂？</a></div>
+                    <div class="info">作者：丹尼&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:20:18&nbsp;&nbsp;&nbsp;阅读：2741 次&nbsp;&nbsp;&nbsp;消耗积分：3 分</div>
+                    <div class="intro">
+                        先简单聊一聊强哥的工作经历。2004年本科毕业于东北林业大学，统计学专业，由于对计算机软件的疯狂热爱，大学期间自学编程，毕业后顺利进入苏州一家软件公司做程序员。工作一...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/3">漫谈：软件开发和软件测试，我该如何选择？</a></div>
+                    <div class="info">作者：reader1&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:24:46&nbsp;&nbsp;&nbsp;阅读：2996 次&nbsp;&nbsp;&nbsp;消耗积分：2 分</div>
+                    <div class="intro">
+                        你说，强哥到底是做开发的呢？还是测试的呢？我一直认为，在开发领域，强哥的测试技术非常扎实，在测试领域，强哥的开发能力也很出众。你说，这事儿怎么办？如果我天天纠结这...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/4">原理：Java程序设计基础-&gt;进制转换</a></div>
+                    <div class="info">作者：强哥&nbsp;&nbsp;&nbsp;类别：PHP开发&nbsp;&nbsp;&nbsp;
+                        日期：2018-06-12 12:02:31&nbsp;&nbsp;&nbsp;阅读：745 次&nbsp;&nbsp;&nbsp;消耗积分：3 分</div>
+                    <div class="intro">
+                        声明：这是一篇容易引起撕逼的文章，为了祖国和谐，人民安康，请各位看官尽量理性讨论。同时，这篇文章是面向一些初入行的朋友进行一些相对中肯一点的分析和建议而已，虽然有...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/5">漫谈：Java和Python现在都挺火，我应该怎么选？</a></div>
+                    <div class="info">作者：丹尼&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:27:22&nbsp;&nbsp;&nbsp;阅读：5464 次&nbsp;&nbsp;&nbsp;消耗积分：4 分</div>
+                    <div class="intro">
+                        声明：这是一篇容易引起撕逼的文章，为了祖国和谐，人民安康，请各位看官尽量理性讨论。同时，这篇文章是面向一些初入行的朋友进行一些相对中肯一点的分析和建议而已，虽然有...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/6">漫谈：强哥关于程序设计学习和实战经验分享</a></div>
+                    <div class="info">作者：强哥&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:33:26&nbsp;&nbsp;&nbsp;阅读：1143 次&nbsp;&nbsp;&nbsp;消耗积分：0 分</div>
+                    <div class="intro">
+                        强哥的学习经验，非学简单，就两个字：多练。每天写它100行代码，每天写，当你积累了20000行代码后，自然就有感觉了。当你积累了100000行代码后，你就是高手了。强哥的学习经...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/7">管理：强哥关于人才培养方面的实战经验分享</a></div>
+                    <div class="info">作者：丹尼&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:35:56&nbsp;&nbsp;&nbsp;阅读：1394 次&nbsp;&nbsp;&nbsp;消耗积分：0 分</div>
+                    <div class="intro">
+                        这篇文章写起来还是挺不容易的，我准备先把这个题目放出来，尽快完成文章内容的编写，敬请期待。...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/8">管理：强哥关于团队建设方面的实战经验分享</a></div>
+                    <div class="info">作者：强哥&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:36:42&nbsp;&nbsp;&nbsp;阅读：874 次&nbsp;&nbsp;&nbsp;消耗积分：0 分</div>
+                    <div class="intro">
+                        这篇文章写起来还是挺不容易的，我准备先把这个题目放出来，尽快完成文章内容的编写，敬请期待。...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/9">漫谈：强哥关于软件测试学习和实战经验分享</a></div>
+                    <div class="info">作者：丹尼&nbsp;&nbsp;&nbsp;类别：测试开发&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:37:32&nbsp;&nbsp;&nbsp;阅读：1036 次&nbsp;&nbsp;&nbsp;消耗积分：0 分</div>
+                    <div class="intro">
+                        是的，就这么简单，都是实战类技术，去做就好，死磕就好。不要天天看概念，不实战。...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 row article-list">
+                <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                    <img src="/thumb/thumb.png"  width="226" height="136"/>
+                </div>
+                <div class="col-sm-9 col-xs-12 detail">
+                    <div class="title"><a href="/article/10">漫谈：会员福利到底是个什么鬼？</a></div>
+                    <div class="info">作者：强哥&nbsp;&nbsp;&nbsp;类别：网络安全&nbsp;&nbsp;&nbsp;
+                        日期：2017-11-10 12:38:59&nbsp;&nbsp;&nbsp;阅读：871 次&nbsp;&nbsp;&nbsp;消耗积分：0 分</div>
+                    <div class="intro">
+                        这个版块是一个预留版块，目前暂时不对外开放。后续计划由于专门会付费会员或高积分会员开辟的一块区域，强哥将进行更加深度的分享和指导。包括一些有版权的资源的分享等。...
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <div class="col-12 paginate">
+                
+            	<a href="/page/1">上一页</a>&nbsp;&nbsp;
+                
+
+                
+                <a href="/page/1">1</a>&nbsp;&nbsp;
+                
+                <a href="/page/2">2</a>&nbsp;&nbsp;
+                
+                <a href="/page/3">3</a>&nbsp;&nbsp;
+                
+                <a href="/page/4">4</a>&nbsp;&nbsp;
+                
+                <a href="/page/5">5</a>&nbsp;&nbsp;
+                
+                <a href="/page/6">6</a>&nbsp;&nbsp;
+                
+                <a href="/page/7">7</a>&nbsp;&nbsp;
+                
+                <a href="/page/8">8</a>&nbsp;&nbsp;
+                
+                <a href="/page/9">9</a>&nbsp;&nbsp;
+                
+                <a href="/page/10">10</a>&nbsp;&nbsp;
+                
+                <a href="/page/11">11</a>&nbsp;&nbsp;
+                
+                <a href="/page/12">12</a>&nbsp;&nbsp;
+                
+                <a href="/page/13">13</a>&nbsp;&nbsp;
+                
+                <a href="/page/14">14</a>&nbsp;&nbsp;
+                
+                <a href="/page/15">15</a>&nbsp;&nbsp;
+                
+
+                
+                <a href="/page/2">下一页</a>
+                
+            </div>
+
+        </div>
+
+        
+        <script src="/js/vue.js"></script>
+        <div class="col-sm-3 col-12" style="padding: 0px 10px;">
+            <div class="col-12 search-bar form-group row">
+                <div class="col-8">
+                    <input type="text" class="form-control" id="keyword" placeholder="请输入关键字" onkeyup="doSearch(event)" />
+                </div>
+                <div class="col-4" style="text-align:right;">
+                    <button type="button" class="btn btn-primary" onclick="doSearch(null)">搜索</button>
+                </div>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最新文章</div>
+                <ul id="last">
+                    <li v-for="(article, index) in content">
+                        <a v-bind:href="'/article/' + article[0]">${index+1}. ${article[1].substr(0,15)}...</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最多阅读</div>
+                <ul id="most">
+                    <li v-for="(article, index) in content">
+                        <a :href="'/article/' + article[0]">${index+1}. ${article[1].substr(0,15)}...</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-12 side" id="fixedmenu">
+                <div class="tip">特别推荐</div>
+                <ul id="recommended">
+                    <li v-for="(article, index) in content">
+                        <a v-bind:href="'/article/' + article[0]">${index+1}. ${article[1].substr(0,15)}...</a>
+                    </li>
+                </ul>
+                <div class="col-12 side" onclick="gotoTop()" style="height: 40px; text-align: center; cursor: pointer">
+                    回到顶部
+                </div>
+            </div>
+
+        </div>
+
+<script type="text/javascript">
+    function doSearch(e) {
+        if (e != null && e.keyCode != 13) {
+            return false;
+        }
+
+        var keyword = $.trim($("#keyword").val());
+        if (keyword.length == 0 || keyword.length > 10 || keyword.indexOf('%')>=0 ) {
+            bootbox.alert({'title':'错误提示', 'message':"你输入的关键字不合法"});
+            $("#keyword").focus();
+            return false;
+        }
+        location.href = '/search/1-' + keyword;
+    }
+
+    // 利用JS来截取字符串，中文1个，英文0.5个。
+    function truncate(headline, length) {
+        var count = 0;
+        var output = '';
+        for (var i in headline) {
+            output += headline.charAt(i);
+            var code = headline.charCodeAt(i);
+            if (code <= 128) {
+                count += 0.5;
+            }
+            else {
+                count += 1;
+            }
+            if (count > length) {
+                break;
+            }
+        }
+        return output + '...';
+    }
+
+    // 在jQuery中表示文档加载完成后开始执行（不需要按钮或事件触发），window.load=function() {}
+    $(document).ready(function () {
+        // 第一步：发送Ajax请求去访问/recommend接口，获取JSON
+        $.get('/recommend', function (data) {
+            // 获取响应并动态填充到对应的推荐栏中
+            var lastData = data[0];
+            var mostData = data[1];
+            var recommendedData = data[2];
+
+            var v1 = new Vue({
+                el: '#last',
+                data: {content: lastData},
+                delimiters: ['${', '}']
+            });
+
+            var v2 = new Vue({
+                el: '#most',
+                data: {content: mostData},
+                delimiters: ['${', '}']
+            });
+
+            var v3 = new Vue({
+                el: '#recommended',
+                data: {content: recommendedData},
+                delimiters: ['${', '}']
+            });
+        })
+    });
+
+    $(document).ready(function(){
+        // 利用浏览器的user-agent属性判断浏览器类型
+        var userAgentInfo = navigator.userAgent.toLowerCase();
+        var agents = ["android", "iphone", "symbianOS", "windows phone", "ipad", "ipod"];
+        var flag = true;    // 表示是PC端
+        for (var v = 0; v < agents.length; v++) {
+            if (userAgentInfo.indexOf(agents[v]) >= 0) {
+                flag = false;   // 表示这是移动端
+                break;
+            }
+        }
+
+        // 是PC端时才进行右侧停靠
+        if (flag == true) {
+            var fixedDiv = document.getElementById("fixedmenu");
+            var H = 0;
+            var Y = fixedDiv;
+            while (Y) {
+                H += Y.offsetTop;
+                Y = Y.offsetParent;
+            }
+
+            window.onscroll = function () {
+                var s = document.body.scrollTop || document.documentElement.scrollTop;
+                if (s > H + 500) {
+                    fixedDiv.style = "position:fixed; top:0; margin-top:0; width: 306px;";
+                } else {
+                    fixedDiv.style = "";
+                }
+            }
+        }
+    });
+
+    function gotoTop() {
+        $('html, body').animate({scrollTop: 0}, 800);
+        return false;
+    }
+
+</script>
+
+
+    </div>
+</div>
+
+<!-- 底部设计 -->
+<div class="container-fluid footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-4 left">
+                	<p>版权所有 &copy; 蜗牛笔记 (V-1.0)</p>
+                	<p>备案号： 蜀ICP备15014130号</p>
+            </div>
+            <div class="col-4 center">
+                	<p>友情链接</p>
+                	<p><a href="http://www.woniuxy.com/" target="_blank">在线课堂</a>&nbsp;&nbsp;&nbsp;
+                    <a href="http://www.woniuxy.com/live" target="_blank">直播课堂</a>&nbsp;&nbsp;&nbsp;
+                    <a href="http://www.woniuxy.com/train/index.html" target="_blank">培训中心</a>&nbsp;&nbsp;&nbsp;
+                    <a href="http://www.aduobi.com" target="_blank">UI设计学院</a>
+                	</p>
+            </div>
+            <div class="col-4 right">
+                	<p>联系我们</p>
+                	<p>成都★孵化园&nbsp;&nbsp;&nbsp;QQ/微信：15903523</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 登录和注册模态框 -->
+<!-- data-backdrop="static" 表示用户必须要手工关闭模态框才能操作其他页面 -->
+<div class="modal fade" id="mymodal" data-backdrop="static" tabindex="-1"
+     role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+    <!-- 在模态框内部配置Tab选项卡，用于切换登录和注册窗口 -->
+    <div class="tabbable" id="tabs" style="background-color: #337AB7; height: 50px;padding: 5px 20px;">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <!-- 与登录和注册窗口的ID进行关联 -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li id="login" class="nav-item active">
+                <a href="#loginpanel" data-toggle="tab" class="nav-link" style="color: midnightblue">登录</a>
+            </li>
+            <li id="reg" class="nav-item">
+                <a href="#regpanel" data-toggle="tab" class="nav-link" style="color: midnightblue">注册</a>
+            </li>
+            <li id="find" class="nav-item">
+                <a href="#findpanel" data-toggle="tab" class="nav-link" style="color: midnightblue">找回密码</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 绘制登录窗口 -->
+    <div class="tab-content">
+    <div class="tab-pane container active" id="loginpanel">
+    <div class="modal-content" style="margin: 20px 0px;">
+    <div class="modal-body">
+        <div class="form-group row" style="margin-top: 20px;">
+            <label for="loginname" class="col-4">&nbsp;&nbsp;登录邮箱：</label>
+            <input type="text" id="loginname" class="form-control col-7" placeholder="请输入你的邮箱地址"/>
+        </div>
+        <div class="form-group row">
+            <label for="loginpass" class="col-4">&nbsp;&nbsp;登录密码：</label>
+            <input type="password" id="loginpass" class="form-control col-7" placeholder="请输入你的登录密码"/>
+        </div>
+        <div class="form-group row">
+            <label for="logincode" class="col-4"> &nbsp;&nbsp;图片验证码：</label>
+            <input type="text" id="logincode" class="form-control col-5" placeholder="请输入右侧的验证码" onkeyup="doLogin(event)"/>
+            <img src="/vcode" id="loginvcode" class="col-3" style="cursor:pointer;" onclick="this.src='/vcode?'+Math.random()"/>
+        </div>
+    </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" onclick="doLogin(null)">登录</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- 绘制注册窗口 -->
+    <div class="tab-pane container" id="regpanel">
+    <div class="modal-content">
+    <div class="modal-content" style="margin: 20px 0px;">
+    <div class="modal-body">
+        <div class="form-group row" style="margin-top: 20px;">
+            <label for="regname" class="col-4">&nbsp;&nbsp;注册邮箱：</label>
+            <input type="text" id="regname" class="form-control col-7" placeholder="请输入你的邮箱地址"/>
+        </div>
+        <div class="form-group row">
+            <label for="regpass" class="col-4">&nbsp;&nbsp;注册密码：</label>
+            <input type="password" id="regpass" class="form-control col-7" placeholder="请输入你的注册密码"/>
+        </div>
+        <div class="form-group row">
+            <label for="regcode" class="col-4">&nbsp;&nbsp;邮箱验证码：</label>
+            <input type="text" id="regcode" class="form-control col-4" placeholder="请输入邮箱验证码" onkeyup="doReg(event)"/>
+            <button type="button" class="btn btn-primary col-3" onclick="doSendMail(this)">发送邮件</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span>注册时请使用邮箱地址，便于找回密码。&nbsp;&nbsp;</span>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="doReg(null)">注册</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- 找回密码 -->
+    <div class="tab-pane container" id="findpanel">
+    <div class="modal-content">
+    <div class="modal-content" style="margin: 20px 0px;">
+    <div class="modal-body">
+        <div class="form-group row" style="margin-top: 20px;">
+            <label for="username" class="col-4">&nbsp;&nbsp;注册邮箱：</label>
+            <input type="text" id="username" class="form-control col-7" placeholder="请输入你的邮箱地址"/>
+        </div>
+        <div class="form-group row">
+            <label for="newpass" class="col-4">&nbsp;&nbsp;新的密码：</label>
+            <input type="password" id="newpass" class="form-control col-7" placeholder="请输入你的注册密码"/>
+        </div>
+        <div class="form-group row">
+            <label for="findcode" class="col-4">&nbsp;&nbsp;邮箱验证码：</label>
+            <input type="text" id="findcode" class="form-control col-4" placeholder="请输入邮箱验证码"/>
+            <button type="button" class="btn btn-primary col-3">发送邮件</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span>请输入注册邮箱地址并重置密码。&nbsp;&nbsp;</span>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary">找回密码</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!-- 必须要设置表单的enctype属性为multipart/form-data，表示文件上传
+     同时表单元素必须指定name属性，供后台接口获取其数据 -->
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+
+<!--<form action="/upload" method="post" enctype="multipart/form-data">-->
+<!--    <input type="text" name="headline"/>-->
+<!--    <textarea name="content"></textarea>-->
+<!--    <input type="file" name="upfile" />    &lt;!&ndash; 文件上传控件 &ndash;&gt;-->
+<!--    &lt;!&ndash; 按钮类型必须为submit才能提交表单 &ndash;&gt;-->
+<!--    <input type="submit" value="开始上传" />-->
+<!--</form>-->
+
+
+<input type="text" id="headline"/>
+<textarea id="content"></textarea>
+<input type="file" id="upfile" />    <!-- 文件上传控件 -->
+<button onclick="doUpload()">上传</button>
+
+
+<script>
+    function doUpload() {
+        var data = new FormData();	// 带附件上传
+        data.append("headline",$.trim($("#headline").val()));
+        data.append("content",$.trim($("#content").val()));
+        <!-- 此处为JavaScript添加文件的方式 -->
+        data.append("upfile",$("#upfile").prop("files")[0]);
+
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: data,     // 指定上传数据
+            cache: false,
+            processData: false,
+            contentType: false,
+            success : function(result) {
+                if(result == "Done"){
+                    window.alert('恭喜你,上传成功.');
+                }else if (result == 'Invalid') {
+                    window.alert('文件类型不匹配.');
+                }
+            },
+            error : function(responseStr) {
+                window.alert('上传失败');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,53 @@
+        <div class="col-sm-3 col-12" style="padding: 0px 10px;">
+            <div class="col-12 search-bar form-group row">
+                <div class="col-8">
+                    <input type="text" class="form-control" id="keyword" placeholder="请输入关键字" onkeyup="doSearch(event)" />
+                </div>
+                <div class="col-4" style="text-align:right;">
+                    <button type="button" class="btn btn-primary" onclick="doSearch(null)">搜索</button>
+                </div>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最新文章</div>
+                <ul>
+                    {% for row in last %}
+                    <li><a href="/article/{{row.articleid}}">{{loop.index}}. {{row.headline | truncate(14)}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最多阅读</div>
+                <ul>
+                    {% for row in most %}
+                    <li><a href="/article/{{row.articleid}}">{{loop.index}}. {{row.headline | truncate(14)}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">特别推荐</div>
+                <ul>
+                    {% for row in recommended %}
+                    <li><a href="/article/{{row.articleid}}">{{loop.index}}. {{row.headline | truncate(14)}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+<script type="text/javascript">
+    function doSearch(e) {
+        if (e != null && e.keyCode != 13) {
+            return false;
+        }
+
+        var keyword = $.trim($("#keyword").val());
+        if (keyword.length == 0 || keyword.length > 10 || keyword.indexOf('%')>=0 ) {
+            bootbox.alert({'title':'错误提示', 'message':"你输入的关键字不合法"});
+            $("#keyword").focus();
+            return false;
+        }
+        location.href = '/search/1-' + keyword;
+    }
+</script>

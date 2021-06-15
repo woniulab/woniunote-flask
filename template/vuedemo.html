@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书销售页面</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <table width="500" border="1" align="center" cellpadding="5">
+        <tr>
+            <td width="20%">编号</td>
+            <td width="30%">书名</td>
+            <td width="30%">作者</td>
+            <td width="20%">价格</td>
+        </tr>
+        <!--
+         1. 填充时绑定JSON数据，进行类似于Jinja2的填充方式
+         2. 循环：v-for来指定循环：v-for=book in content， v-for=(book, index) in content
+         3.
+         -->
+        <tbody id="booklist">
+        <tr v-for="book in content">
+            <td>{{book.id}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.price}}</td>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <script>
+        var books = [
+            {'id': 1, 'title': 'PHP教程', 'author': '张三', 'price': 52},
+            {'id': 2, 'title': 'Python教程', 'author': '李四', 'price': 36},
+            {'id': 3, 'title': 'Java教程', 'author': '王五', 'price': 68}
+        ];
+        var v = new Vue({
+            el: '#booklist',  // 绑定的元素不能与v-for同级，最好上级
+            data: {content: books},
+            // delimiters: ['${','}']
+        });
+    </script>
+</body>
+</html>

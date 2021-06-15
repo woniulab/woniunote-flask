@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- 中部区域布局 -->
+<div class="container" style="margin-top: 10px;">
+    <div class="row">
+        <div class="col-sm-2 col-12" style="padding: 0px 10px; ">
+            <div class="col-12 admin-side" style="height: 360px">
+                <!-- 为左侧菜单栏添加正确的超链接 -->
+                <ul>
+                    <li><a href="/admin"><span class="oi oi-image" aria-hidden="true"></span>&nbsp;&nbsp;文章管理</a></li>
+                    <li><a href="/admin/comment"><span class="oi oi-task" aria-hidden="true"></span>&nbsp;&nbsp;评论管理</a></li>
+                    <li><a href="/admin/user"><span class="oi oi-person" aria-hidden="true"></span>&nbsp;&nbsp;用户管理</a></li>
+                    <li><a href="/admin/credit"><span class="oi oi-yen" aria-hidden="true"></span>&nbsp;&nbsp;积分管理</a></li>
+                    <li><a href="/admin/favorite"><span class="oi oi-heart" aria-hidden="true"></span>&nbsp;&nbsp;收藏管理</a></li>
+                    <li><a href="/admin/recommend"><span class="oi oi-account-login" aria-hidden="true"></span>&nbsp;&nbsp;推荐管理</a></li>
+                    <li><a href="/admin/hide"><span class="oi oi-eye" aria-hidden="true"></span>&nbsp;&nbsp;隐藏管理</a></li>
+                    <li><a href="/admin/check"><span class="oi oi-zoom-in" aria-hidden="true"></span>&nbsp;&nbsp;投稿审核</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-10 col-12" style="padding: 0px 10px">
+            <div class="col-12 admin-main">
+                <div class="col-12 row"
+                     style="padding: 10px;margin: 0px 10px;">
+                    <div class="col-3">
+                        <!-- 根据article_type字典对象填充分类下拉框 -->
+                        <select id="type" class="form-control">
+                            <option value="0">所有分类</option>
+                            {% for key, value in article_type.items() %}
+                            <option value="{{key}}">{{value}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <input type="button" class="btn btn-primary" value="分类搜索" onclick="doSearchByType()"/>
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-3">
+                        <input type="text" class="form-control" id="keyword"/>
+                    </div>
+                    <div class="col-2">
+                        <input type="button" class="btn btn-primary" value="标题搜索" onclick="doSearchByHeadline()"/>
+                    </div>
+                </div>
+
+                <div class="col-12" style="padding: 10px;">
+                    <table class="table col-12">
+                        <thead style="font-weight: bold">
+                        <tr>
+                            <td width="10%" align="center">编号</td>
+                            <td width="50%">标题</td>
+                            <td width="8%" align="center">浏览</td>
+                            <td width="8%" align="center">评论</td>
+                            <td width="24%">操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for article in result %}
+                        <tr>
+                            <td align="center">{{article.articleid}}</td>
+                            <td><a href="/article/{{article.articleid}}" target="_blank">{{article.headline}}</a></td>
+                            <td align="center">{{article.readcount}}</td>
+                            <td align="center">{{article.replycount}}</td>
+                            <td>
+                                <a href="/edit/{{article.articleid}}" target="_blank">
+                                    编辑
+                                </a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" onclick="switchRecommend(this, {{article.articleid}})">
+                                    {% if article.recommended == 0 %}推荐
+                                    {% else %} <font color="red">已推</font> {% endif %}
+                                </a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" onclick="switchHide(this, {{article.articleid}})">
+                                    {% if article.hidden == 0 %}隐藏
+                                    {% else %} <font color="red">已隐</font> {%endif %}
+                                </a>&nbsp;&nbsp;&nbsp;
+                                <a href="#" onclick="switchCheck(this, {{article.articleid}})">
+                                    {% if article.checked == 1 %}已审
+                                    {% else %} <font color="red">待审</font> {%endif %}
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+
+                    <table class="table col-12">
+                        <tr>
+                            <td valign="middle" align="center">
+                                {% if page == 1 %}
+                                <a href="/admin/article/1">上一页</a>&nbsp;&nbsp;
+                                {% else %}
+                                <a href="/admin/article/{{page - 1}}">上一页</a>&nbsp;&nbsp;
+                                {% endif %}
+
+                                {% for i in range(total) %}
+                                <a href="/admin/article/{{i + 1}}">{{i + 1}}</a>&nbsp;&nbsp;
+                                {% endfor %}
+
+                                {% if page == total %}
+                                <a href="/admin/article/{{page}}">下一页</a>
+                                {% else %}
+                                <a href="/admin/article/{{page + 1}}">下一页</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // 为了直接展示搜索结果，不需要使用Ajax，而是直接跳转页面即可
+    function doSearchByType() {
+        var type = $("#type").val();
+        location.href = '/admin/type/' + type + '-1';
+    }
+
+    function doSearchByHeadline() {
+        var keyword = $("#keyword").val();
+        location.href = '/admin/search/' + keyword;
+    }
+
+    function switchHide(obj, articleid) {
+        $.get('/admin/article/hide/' + articleid, function (data) {
+            if (data == '1') {
+                $(obj).html('<font color="red">已隐</font>');
+            }
+            else {
+                $(obj).text('隐藏');
+            }
+        });
+    }
+
+    function switchRecommend(obj, articleid) {
+        $.get('/admin/article/recommend/' + articleid, function (data) {
+            if (data == '1') {
+                $(obj).html('<font color="red">已推</font>');
+            }
+            else {
+                $(obj).text('推荐');
+            }
+        });
+    }
+
+    function switchCheck(obj, articleid) {
+        $.get('/admin/article/check/' + articleid, function (data) {
+            if (data == '0') {
+                $(obj).html('<font color="red">待审</font>');
+            }
+            else {
+                $(obj).text('已审');
+            }
+        });
+    }
+</script>
+
+{% endblock %}

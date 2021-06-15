@@ -1,0 +1,146 @@
+<script src="/js/vue.js"></script>
+        <div class="col-sm-3 col-12" style="padding: 0px 10px;">
+            <div class="col-12 search-bar form-group row">
+                <div class="col-8">
+                    <input type="text" class="form-control" id="keyword" placeholder="请输入关键字" onkeyup="doSearch(event)" />
+                </div>
+                <div class="col-4" style="text-align:right;">
+                    <button type="button" class="btn btn-primary" onclick="doSearch(null)">搜索</button>
+                </div>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最新文章</div>
+                <ul id="last">
+                    <li v-for="(article, index) in content">
+                        <a v-bind:href="'/article/' + article[0]">${index+1}. ${article[1].substr(0,15)}...</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最多阅读</div>
+                <ul id="most">
+                    <li v-for="(article, index) in content">
+                        <a :href="'/article/' + article[0]">${index+1}. ${article[1].substr(0,15)}...</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-12 side" id="fixedmenu">
+                <div class="tip">特别推荐</div>
+                <ul id="recommended">
+                    <li v-for="(article, index) in content">
+                        <a v-bind:href="'/article/' + article[0]">${index+1}. ${article[1].substr(0,15)}...</a>
+                    </li>
+                </ul>
+                <div class="col-12 side" onclick="gotoTop()" style="height: 40px; text-align: center; cursor: pointer">
+                    回到顶部
+                </div>
+            </div>
+
+        </div>
+
+<script type="text/javascript">
+    function doSearch(e) {
+        if (e != null && e.keyCode != 13) {
+            return false;
+        }
+
+        var keyword = $.trim($("#keyword").val());
+        if (keyword.length == 0 || keyword.length > 10 || keyword.indexOf('%')>=0 ) {
+            bootbox.alert({'title':'错误提示', 'message':"你输入的关键字不合法"});
+            $("#keyword").focus();
+            return false;
+        }
+        location.href = '/search/1-' + keyword;
+    }
+
+    // 利用JS来截取字符串，中文1个，英文0.5个。
+    function truncate(headline, length) {
+        var count = 0;
+        var output = '';
+        for (var i in headline) {
+            output += headline.charAt(i);
+            var code = headline.charCodeAt(i);
+            if (code <= 128) {
+                count += 0.5;
+            }
+            else {
+                count += 1;
+            }
+            if (count > length) {
+                break;
+            }
+        }
+        return output + '...';
+    }
+
+    // 在jQuery中表示文档加载完成后开始执行（不需要按钮或事件触发），window.load=function() {}
+    $(document).ready(function () {
+        // 第一步：发送Ajax请求去访问/recommend接口，获取JSON
+        $.get('/recommend', function (data) {
+            // 获取响应并动态填充到对应的推荐栏中
+            var lastData = data[0];
+            var mostData = data[1];
+            var recommendedData = data[2];
+
+            var v1 = new Vue({
+                el: '#last',
+                data: {content: lastData},
+                delimiters: ['${', '}']
+            });
+
+            var v2 = new Vue({
+                el: '#most',
+                data: {content: mostData},
+                delimiters: ['${', '}']
+            });
+
+            var v3 = new Vue({
+                el: '#recommended',
+                data: {content: recommendedData},
+                delimiters: ['${', '}']
+            });
+        })
+    });
+
+    $(document).ready(function(){
+        // 利用浏览器的user-agent属性判断浏览器类型
+        var userAgentInfo = navigator.userAgent.toLowerCase();
+        var agents = ["android", "iphone", "symbianOS", "windows phone", "ipad", "ipod"];
+        var flag = true;    // 表示是PC端
+        for (var v = 0; v < agents.length; v++) {
+            if (userAgentInfo.indexOf(agents[v]) >= 0) {
+                flag = false;   // 表示这是移动端
+                break;
+            }
+        }
+
+        // 是PC端时才进行右侧停靠
+        if (flag == true) {
+            var fixedDiv = document.getElementById("fixedmenu");
+            var H = 0;
+            var Y = fixedDiv;
+            while (Y) {
+                H += Y.offsetTop;
+                Y = Y.offsetParent;
+            }
+
+            window.onscroll = function () {
+                var s = document.body.scrollTop || document.documentElement.scrollTop;
+                if (s > H + 500) {
+                    fixedDiv.style = "position:fixed; top:0; margin-top:0; width: 306px;";
+                } else {
+                    fixedDiv.style = "";
+                }
+            }
+        }
+    });
+
+    function gotoTop() {
+        $('html, body').animate({scrollTop: 0}, 800);
+        return false;
+    }
+
+</script>

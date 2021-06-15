@@ -1,0 +1,93 @@
+        <div class="col-sm-3 col-12" style="padding: 0px 10px;">
+            <div class="col-12 search-bar form-group row">
+                <div class="col-8">
+                    <input type="text" class="form-control" id="keyword" placeholder="请输入关键字" onkeyup="doSearch(event)" />
+                </div>
+                <div class="col-4" style="text-align:right;">
+                    <button type="button" class="btn btn-primary" onclick="doSearch(null)">搜索</button>
+                </div>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最新文章</div>
+                <ul id="last"></ul>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">最多阅读</div>
+                <ul id="most"></ul>
+            </div>
+
+            <div class="col-12 side">
+                <div class="tip">特别推荐</div>
+                <ul id="recommended"></ul>
+            </div>
+        </div>
+
+<script type="text/javascript">
+    function doSearch(e) {
+        if (e != null && e.keyCode != 13) {
+            return false;
+        }
+
+        var keyword = $.trim($("#keyword").val());
+        if (keyword.length == 0 || keyword.length > 10 || keyword.indexOf('%')>=0 ) {
+            bootbox.alert({'title':'错误提示', 'message':"你输入的关键字不合法"});
+            $("#keyword").focus();
+            return false;
+        }
+        location.href = '/search/1-' + keyword;
+    }
+
+    // 利用JS来截取字符串，中文1个，英文0.5个。
+    function truncate(headline, length) {
+        var count = 0;
+        var output = '';
+        for (var i in headline) {
+            output += headline.charAt(i);
+            var code = headline.charCodeAt(i);
+            if (code <= 128) {
+                count += 0.5;
+            }
+            else {
+                count += 1;
+            }
+            if (count > length) {
+                break;
+            }
+        }
+        return output + '...';
+    }
+
+    // 在jQuery中表示文档加载完成后开始执行（不需要按钮或事件触发），window.load=function() {}
+    $(document).ready(function () {
+        // 第一步：发送Ajax请求去访问/recommend接口，获取JSON
+        $.get('/recommend', function (data) {
+            // 获取响应并动态填充到对应的推荐栏中
+            var lastData = data[0];
+            var mostData = data[1];
+            var recommendedData = data[2];
+
+            for (var i in lastData) {
+                var articleid = lastData[i][0];
+                var headline = lastData[i][1];
+                var id = parseInt(i) + 1;
+                $("#last").append('<li><a href="/article/'+articleid+'">'+id+'. '+truncate(headline, 14)+'</a></li>');
+            }
+
+            for (var i in mostData) {
+                var articleid = mostData[i][0];
+                var headline = mostData[i][1];
+                var id = parseInt(i) + 1;
+                $("#most").append('<li><a href="/article/'+articleid+'">'+id+'. '+truncate(headline, 14)+'</a></li>');
+            }
+
+            for (var i in recommendedData) {
+                var articleid = recommendedData[i][0];
+                var headline = recommendedData[i][1];
+                var id = parseInt(i) + 1;
+                $("#recommended").append('<li><a href="/article/'+articleid+'">'+id+'. '+truncate(headline, 14)+'</a></li>');
+            }
+        })
+    });
+</script>

@@ -1,0 +1,255 @@
+body {
+    margin: 0px; /* 让浏览器窗口与元素之间无间隙 */
+    background-color: #eeeeee; /* 浏览器整体浅灰色背景 */
+    font-size: 16px; /* 字体大小 */
+    font-family: 微软雅黑, 幼圆, 宋体, Verdana; /* 字体名称 */
+}
+/* 为container容器设置宽度 */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1300px;
+    }
+}
+.header {
+    border-top: solid 3px black;
+    border-radius: 0px
+}
+/* 为所有DIV元素设置圆角边框 */
+div {
+    border-radius: 5px;
+}
+/* 为所有label标签设置加粗显示 */
+label {
+    font-weight: bold;
+}
+/* 为全站所有超链接设置基本样式 */
+a:link, a:visited {
+    text-decoration: none;
+    color: #337ab7;
+}
+a:hover, a:active {
+    text-decoration: none;
+    color: #e56244;
+}
+label {
+    cursor: pointer;
+}
+
+/* 为分类导航栏设置样式 */
+.menu {
+    width: 100%;
+    margin-bottom: 10px;
+    border-top: solid 2px orangered;
+    background-color: #563d7c;
+    /*background-color: #337ab7;*/
+}
+.menu-bar {
+    /*background-color: #337ab7;*/
+}
+.menu .menu-bar a:link {
+    color: whitesmoke;
+}
+
+/* 首页文章列表栏样式 */
+.article-list {
+    border: solid 1px #cccccc;
+    margin: 10px 0px;
+    background-color: whitesmoke;
+    padding: 15px 0px;
+}
+.article-list .thumb {
+    margin: 0px;
+    padding: 2px 10px 0 0;
+}
+.article-list .detail {
+    padding: 0px 10px;
+}
+.article-list .detail .title {
+    font-size: 22px;
+    color: #e56244;
+    margin-bottom: 10px;
+}
+.article-list .detail .info {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+.article-list .detail .intro {
+    font-size: 16px;
+    word-break: break-all;
+    word-wrap: break-word;
+    line-height: 25px;
+}
+/* 分页栏样式 */
+.paginate {
+    border: solid 1px #cccccc;
+    margin: 5px 0px;
+    background-color: whitesmoke;
+    padding: 20px 0px;
+    text-align: center;
+}
+/* 文章搜索栏样式 */
+.search-bar {
+    margin: 0px;
+    border: solid 1px #cccccc;
+    padding: 10px 0px;
+    background-color: #563d7c;
+}
+/* 页面中部右侧边样样式 */
+.side {
+    margin-top: 20px;
+    border: solid 1px #cccccc;
+    padding: 0px 0px;
+    background-color: whitesmoke;
+}
+.side .tip {
+    background-color: #333333;
+    height: 42px;
+    color: white;
+    line-height: 42px;
+    padding-left: 10px;
+    border-radius: 0px;
+    font-size: 18px;
+    border-bottom: solid 2px orangered;
+}
+.side ul {
+    list-style: none;
+    padding-left: 0px;
+}
+.side ul li {
+    line-height: 35px;
+    padding-left: 10px;
+}
+/* 底部栏样式 */
+.footer {
+    background-color: #333333;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    color: white;
+}
+.footer .left {
+    font-size: 16px;
+    margin: 20px 0px;
+}
+.footer .center {
+    font-size: 16px;
+    margin: 20px 0px;
+    text-align: center;
+}
+.footer .right {
+    font-size: 16px;
+    margin: 20px 0px;
+    text-align: right;
+}
+
+/* 文章详情页面 */
+.article-detail {
+    border: solid 1px #cccccc;
+    padding: 30px 15px;
+    margin: 0px;
+}
+.article-detail .title {
+    font-size: 24px;
+    color: #e56244;
+}
+.article-detail .favorite {
+    text-align: right;
+    font-weight: bold;
+}
+.article-detail .info {
+    margin-top: 20px;
+    border-bottom: solid 1px #cccccc;
+    line-height: 60px;
+}
+.article-detail .content {
+    margin-top: 30px;
+}
+.article-detail .content img {
+    max-width: 100%;
+}
+
+.article-detail .readall {
+    margin: 20px 0px;
+    text-align: center;
+}
+.article-detail .readall button {
+    height: 45px;
+    background-color: #337AB7;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.article-nav {
+    border: solid 1px #cccccc;
+    margin-top: 20px;
+}
+.article-nav div {
+    height: 40px;
+    line-height: 40px;
+}
+
+/* 文章评论 */
+.article-comment {
+    border: solid 1px #cccccc;
+    margin: 10px 0px;
+    background-color: whitesmoke;
+    padding: 20px 0px 10px 0px;
+    line-height: 35px;
+}
+.article-comment .list {
+    margin: 0px 0px 10px 0px;
+    border-top: solid 1px #cccccc;
+    padding-top: 10px;
+}
+.article-comment .list .icon {
+    margin: 0px;
+    padding-top: 10px;
+    text-align: right;
+}
+.article-comment .list .icon img {
+    margin-right: 30px;
+}
+.article-comment .list .comment {
+    padding: 0px 0px;
+}
+.article-comment .list .comment .commenter {
+    font-size: 14px;
+    color: #666666;
+}
+.article-comment .list .comment .content {
+    font-size: 16px;
+    padding-left: 0px;
+}
+.article-comment .list .comment .reply {
+    text-align: right;
+}
+.article-comment .list .comment .reply label{
+    font-weight: normal;
+    color: #337AB7;
+    cursor: pointer;
+}
+
+
+/* 后台管理的左则样式 */
+.admin-side {
+    margin: 10px 0px;
+    border: solid 1px #cccccc;
+    padding: 20px 0px;
+    background-color: whitesmoke;
+}
+.admin-side ul{
+    list-style: none;
+}
+.admin-side li {
+    line-height: 40px;
+}
+.admin-main {
+    border: solid 1px #cccccc;
+    margin: 10px 0px;
+    background-color: whitesmoke;
+    padding: 15px 0px;
+}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- 中部区域布局 -->
+<div class="container" style="margin-top: 10px;">
+    <div class="row">
+        <div class="col-sm-2 col-12" style="padding: 0px 10px; ">
+            <div class="col-12 admin-side" style="height: 320px">
+                <!-- 为左侧菜单栏添加正确的超链接 -->
+                <ul>
+                    <li><a href="/ucenter"><span class="oi oi-heart" aria-hidden="true"></span>&nbsp;&nbsp;我的收藏</a></li>
+                    {% if session.get('role') == 'user' %}
+                    <li><a href="/user/post"><span class="oi oi-zoom-in" aria-hidden="true"></span>&nbsp;&nbsp;我要投稿</a></li>
+                    <!-- 普通用户投稿，作者角色直接发布文章 -->
+                    {% elif session.get('role') == 'editor' %}
+                    <li><a href="/prepost"><span class="oi oi-zoom-in" aria-hidden="true"></span>&nbsp;&nbsp;发布文章</a></li>
+                    <li><a href="/user/draft"><span class="oi oi-book" aria-hidden="true"></span>&nbsp;&nbsp;我的草稿</a></li>
+                    {% endif %}
+                    <li><a href="/user/article"><span class="oi oi-shield" aria-hidden="true"></span>&nbsp;&nbsp;我的文章</a></li>
+                    <li><a href="/user/comment"><span class="oi oi-task" aria-hidden="true"></span>&nbsp;&nbsp;我的评论</a></li>
+                    <li><a href="/user/info"><span class="oi oi-person" aria-hidden="true"></span>&nbsp;&nbsp;个人资料</a></li>
+                    <li><a href="/user/credit"><span class="oi oi-account-login" aria-hidden="true"></span>&nbsp;&nbsp;我的积分</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-10 col-12" style="padding: 0px 10px">
+            <div class="col-12 admin-main">
+                <div class="col-12" style="padding: 10px;">
+                    <table class="table col-12">
+                        <thead style="font-weight: bold">
+                        <tr>
+                            <td width="10%" align="center">编号</td>
+                            <td width="60%">标题</td>
+                            <td width="8%" align="center">浏览</td>
+                            <td width="8%" align="center">评论</td>
+                            <td width="14%" align="center">操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for favorite, article in result %}
+                        <tr>
+                            <td align="center">{{article.articleid}}</td>
+                            <td><a href="/article/{{article.articleid}}" target="_blank">{{article.headline}}</a></td>
+                            <td align="center">{{article.readcount}}</td>
+                            <td align="center">{{article.replycount}}</td>
+                            <td align="center">
+                                <a href="#" onclick="switchFavorite(this, {{favorite.favoriteid}})">
+                                    {%if favorite.canceled == 0 %} 取消收藏
+                                    {% else %} <font color="red">继续收藏</font> {% endif %}
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function switchFavorite(obj, favoriteid) {
+        $.get('/user/favorite/' + favoriteid, function (data) {
+            if (data == '1') {
+                $(obj).html('<font color="red">继续收藏</font>');
+            }
+            else {
+                $(obj).text('取消收藏');
+            }
+        });
+    }
+</script>
+
+{% endblock %}
